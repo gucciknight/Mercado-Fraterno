@@ -9,10 +9,15 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
+import os
 
 from pathlib import Path
 
+import sys
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -30,14 +35,23 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
+DJANGO_APPS = (
+	'django.contrib.admin', 
+	'django.contrib.auth', 
+	'django.contrib.contenttypes', 
+	'django.contrib.sessions', 
+	'django.contrib.messages', 
+	'django.contrib.staticfiles', 
+) 
+THIRD_APPS = ( 
+	#apps descargadas
+			  ) 
+LOCAL_APPS = (
+	#apps agregadas
+    'core.apps.CoreConfig', 
+			  ) 
+
+INSTALLED_APPS = THIRD_APPS + DJANGO_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -76,7 +90,7 @@ WSGI_APPLICATION = 'mercado_fraterno.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR / 'db.sqlite3'),
     }
 }
 
@@ -115,9 +129,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'core.User'
