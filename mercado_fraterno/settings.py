@@ -45,6 +45,7 @@ DJANGO_APPS = (
 ) 
 THIRD_APPS = ( 
 	#apps descargadas
+    'django_extensions',
 			  ) 
 LOCAL_APPS = (
 	#apps agregadas
