@@ -6,5 +6,5 @@ urlpatterns = [
     path('', market.home, name='home'),
     path('monedas/', include(([
         path('', market.CoinListView.as_view(), name='coin_list'),
-    ], 'monedas'), namespace='students')),
+    ], 'core'), namespace='students')),
 ]
