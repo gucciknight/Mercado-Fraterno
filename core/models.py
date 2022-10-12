@@ -12,7 +12,7 @@ class Participant(models.Model):
     is_admited = models.BooleanField(default=False)
 
 
-class Admin(models.Model):
+class Administrator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 
 

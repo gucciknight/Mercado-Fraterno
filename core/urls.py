@@ -4,5 +4,7 @@ from .views import market
 
 urlpatterns = [
     path('', market.home, name='home'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('monedas/', include(([
+        path('', market.CoinListView.as_view(), name='coin_list'),
+    ], 'monedas'), namespace='students')),
 ]

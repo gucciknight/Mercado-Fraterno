@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
+
 {% block content %}
 
 <h2>Bienvenido a mercado fraterno <span class="icon-emo-happy"></span></h2>
   <p class="lead">
-    si ya tienes una cuenta <a href="{% url 'login' %}">Entra aquí</a>.{% comment %} If you are new to Django Schools, get started
-    by creating a <a href="{% url 'student_signup' %}">student account</a> or a <a href="{% url 'teacher_signup' %}">teacher account</a>.
+    si ya tienes una cuenta <a href="{% url 'login' %}">Entra aquí</a>. If you are new to Django Schools, get started
+
   </p>
   <hr>
   <h3>What's this about?</h3>
@@ -14,7 +15,7 @@
     based on their interests.
   </p>
   <p>Want to run this code locally? <a href="https://github.com/sibtc/django-multiple-user-types-example/blob/master/README.md">Read detailed instructions on how to run this project</a>.</p>#}
-{% endcomment %} 
+{% comment %}{% endcomment %} 
   <p class="mb-0">Vitor Freitas<br><a href="https://twitter.com/vitorfs/">@vitorfs</a></p>
 
 {% endblock %}
