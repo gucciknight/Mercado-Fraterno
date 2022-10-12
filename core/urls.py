@@ -1,7 +1,8 @@
 from django.urls import include, path
 
-from .views import home
+from .views import market 
 
 urlpatterns = [
-    path('', home, name='home'),
+    path('', market.home, name='home'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]

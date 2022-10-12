@@ -46,6 +46,7 @@ DJANGO_APPS = (
 THIRD_APPS = ( 
 	#apps descargadas
     'django_extensions',
+    'crispy_forms'
 			  ) 
 LOCAL_APPS = (
 	#apps agregadas

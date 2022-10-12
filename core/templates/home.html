@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-{% comment %}
+
 <h2>Bienvenido a mercado fraterno <span class="icon-emo-happy"></span></h2>
   <p class="lead">
-    si ya tienes una cuenta <a href="{% url 'login' %}">log in</a>. If you are new to Django Schools, get started
+    si ya tienes una cuenta <a href="{% url 'login' %}">Entra aquí</a>.{% comment %} If you are new to Django Schools, get started
     by creating a <a href="{% url 'student_signup' %}">student account</a> or a <a href="{% url 'teacher_signup' %}">teacher account</a>.
   </p>
   <hr>
