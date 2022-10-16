@@ -8,8 +8,11 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
 # Create your views here.
 def home(request):
+    user_name = request.user.first_name
     if request.user.is_authenticated:
-        return render(request, 'market/coins.html')
+        return render(request, 'market/coins.html', {
+            "user_name": user_name
+        })
     return render(request, 'home.html')
 
 

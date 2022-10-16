@@ -8,8 +8,11 @@ from django.contrib.auth.decorators import login_required
 #from django.utils.decorators import method_decorator
 #from django.views.generic import CreateView, ListView, UpdateView
 
+from django.shortcuts import render, get_list_or_404
+
+
 #from ..decorators import student_required
-from ..forms import StudentInterestsForm, AdministratorSignUpForm
+from ..forms import AdministratorSignUpForm
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
 
 from django.views.generic import TemplateView
@@ -20,9 +23,9 @@ class AdministratorSignUpView(TemplateView):
     form_class = AdministratorSignUpForm
     template_name = 'registration/signup_form.html'
 
-    def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'student'
-        return super().get_context_data(**kwargs)
+    #def get_context_data(self, **kwargs):
+    #    kwargs['user_type'] = 'student'
+    #    return super().get_context_data(**kwargs)
 
     #def form_valid(self, form):
     #    user = form.save()

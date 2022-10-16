@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from core.views import administrator, participant
 
 #from core.views.home import login
 
@@ -22,5 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
+    path('accounts/signup/', administrator.AdministratorSignUpView.as_view(), name='signup')
+    #path('')
     #path(signup, core.)
 ]

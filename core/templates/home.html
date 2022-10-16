@@ -2,13 +2,13 @@
 
 {% block content %}
 
-<h2 class="text-md-left text-center py-3">Bienvenido a mercado fraterno <span class="icon-emo-happy"></span></h2>
+<h2 class="text-md-left text-center py-4">Bienvenido a mercado fraterno <span class="icon-emo-happy"></span></h2>
   <p class="lead">
-  Si ya tienes una cuenta <a href="{% url 'login' %}">Ingresa aquí</a>. Si eres nuevo debes ingresar por medio del formulario de inscripción y esperar a que tu solicitud sea aceptada.
+  Si ya tienes una cuenta <a href="{% url 'login' %}">Ingresa aquí</a>. Si eres nuevo debes ingresar por medio del <a href="{% url 'signup' %}">formulario de inscripción</a> y esperar a que tu solicitud sea aceptada.
 
   </p>
   <hr>
-  <h3 class="text-md-left text-center py-3">¿Que es Mercado Fraterno?</h3>
+  <h3 class="text-md-left text-center py-4">¿Que es Mercado Fraterno?</h3>
   <p>
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sollicitudin sodales sapien, sit amet ullamcorper sapien ullamcorper id. Donec commodo molestie lacus, ut rhoncus leo finibus posuere. Sed lorem tellus, commodo ut purus non, efficitur tempus ex. Curabitur sollicitudin luctus massa nec aliquam. Donec eu cursus dolor, a convallis justo. Duis tincidunt quis risus in dignissim. Phasellus luctus magna urna.
 
@@ -16,6 +16,6 @@ Praesent et massa eros. Aliquam consectetur condimentum elementum. Vestibulum no
   </p>
   <p>¿Tienes alguna duda? <a href="https://github.com/sibtc/django-multiple-user-types-example/blob/master/README.md">Contactanos</a>.</p>
 {% comment %}{% endcomment %} 
-  <p class="mb-0">Creado por Agustín Rodríguez<br><a href="https://github.com/gucciknight?tab=overview&from=2022-09-01&to=2022-09-30">gucciknight</a></p>
+  <p class="mb-0">Creado por <a href="https://github.com/gucciknight?tab=overview&from=2022-09-01&to=2022-09-30">Agustín Rodríguez.</a><br></p>
 
 {% endblock %}
