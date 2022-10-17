@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Hola {{ user_name }} Ingresaste!</h2>
-<a href="{% url 'logout' %}">log out</a>
+<h2 class="text-center">Hola {{ user_name }}!</h2>
+{% for coin in coin_list %} 
+<div class="text-center">
+    <br>
+    <button type="submit" class="btn btn-primary my-1 mx-auto">{{ coin.coin.name }}</button>
+    {% endfor %}
+</div>
+<br>
+<a class="my-1" href="{% url 'logout' %}">log out</a>
 {% endblock %}

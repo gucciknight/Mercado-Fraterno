@@ -8,14 +8,31 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
 # Create your views here.
 def home(request):
-    user_name = request.user.first_name
+    
+    #coin_list = Coin.objects.filter(coin = coin_balance_list)
+    #user_coins = request.
     if request.user.is_authenticated:
+        user_name = request.user.first_name
+        coin_list = CoinBalance.objects.filter(user=request.user)
         return render(request, 'market/coins.html', {
-            "user_name": user_name
+            "user_name": user_name,
+            "coin_list": coin_list
         })
     return render(request, 'home.html')
 
+class CoinListView(ListView):
+    def get_associated_coins(self):
+        coin_list = self.request.coin.name
+        return coin_list
 
+class TransactionMarketView(ListView):
+    def get_participants():
+        return 
+
+    def get_balance():
+        return
+
+'''
 @method_decorator(login_required, name='dispatch')
 class CoinListView(ListView):
     model = Coin
@@ -28,5 +45,5 @@ class CoinListView(ListView):
             .select_related('subject') \
             .annotate(questions_count=Count('questions', distinct=True)) \
             .annotate(taken_count=Count('taken_quizzes', distinct=True))
-        return queryset
-        
+        return queryset        
+'''
