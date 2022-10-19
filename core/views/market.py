@@ -8,7 +8,6 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
 # Create your views here.
 def home(request):
-    
     #coin_list = Coin.objects.filter(coin = coin_balance_list)
     #user_coins = request.
     if request.user.is_authenticated:
@@ -25,9 +24,25 @@ class CoinListView(ListView):
         coin_list = self.request.coin.name
         return coin_list
 
-class TransactionMarketView(ListView):
-    def get_participants():
-        return 
+class MarketView(DetailView):
+    model = CoinBalance
+    context_object_name = 'transaction_market'
+    template_name = 'market/market.html'
+
+    def get_context_data(self,**kwargs):
+        coin_balance = self.get_object()
+        actual_coin = coin_balance.coin.name
+        coin_id = coin_balance.coin.id
+        balance = coin_balance.balance
+        coin_offer = coin_balance.offer
+        extra_context = {
+            "actual_coin": actual_coin,
+            "coin_id": coin_id,
+            "coin_balance": balance,
+            "coin_offer": coin_offer
+        }
+        kwargs.update(extra_context)
+        return super().get_context_data(**kwargs)
 
     def get_balance():
         return
