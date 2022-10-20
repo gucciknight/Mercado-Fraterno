@@ -35,11 +35,14 @@ class MarketView(DetailView):
         coin_id = coin_balance.coin.id
         balance = coin_balance.balance
         coin_offer = coin_balance.offer
+        coin_participants_with_this_user = CoinBalance.objects.filter(coin = coin_balance.coin)
+        coin_participants = coin_participants_with_this_user.exclude(user = coin_balance.user)
         extra_context = {
             "actual_coin": actual_coin,
             "coin_id": coin_id,
             "coin_balance": balance,
-            "coin_offer": coin_offer
+            "coin_offer": coin_offer,
+            "coin_participants": coin_participants
         }
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
