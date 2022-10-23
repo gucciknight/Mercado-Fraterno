@@ -1,7 +1,9 @@
-from django.shortcuts import render, redirect
+from datetime import datetime
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
+from django.urls import reverse
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
@@ -42,14 +44,52 @@ class MarketView(DetailView):
             "coin_id": coin_id,
             "coin_balance": balance,
             "coin_offer": coin_offer,
-            "coin_participants": coin_participants
+            "coin_participants": coin_participants,
+            "coin_balance_id": coin_balance.pk
         }
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
 
-    def get_balance():
-        return
+def transference(request, coin_balance_id):
 
+    user_coin_balance = get_object_or_404(CoinBalance,pk=coin_balance_id)
+    
+    try:
+        reciever_user = User.objects.get(pk=request.POST["coin_user"])
+        ammount_transfered = request.POST["coin_ammount"]
+    except (KeyError, CoinBalance.DoesNotExist):
+        return render(request, "market/market.html", {
+            "question": reciever_user,
+            "error_message": "No elegiste una respuesta"
+        })
+    else:
+        reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
+        reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)
+
+        user_coin_balance.balance = user_coin_balance.balance - int(ammount_transfered)
+        user_coin_balance.save()
+        reciever_coin_balance.balance = reciever_coin_balance.balance + int(ammount_transfered)
+        reciever_coin_balance.save()
+        
+        new_transaction = Transaction(sender=user_coin_balance,reciever=reciever_coin_balance,ammount=ammount_transfered,date=datetime.now())
+        new_transaction.save()
+
+        return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
+
+class TransactionView(DetailView):
+    model = Transaction
+    context_object_name = 'transaction_detail'
+    template_name = 'market/transaction_detail.html'
+
+    def get_context_data(self, **kwargs):
+        hola = self.get_object()
+        extra_context = {
+            "hola": hola
+        }
+        kwargs.update(extra_context)
+        context = super().get_context_data(**kwargs)
+        return context
+    
 '''
 @method_decorator(login_required, name='dispatch')
 class CoinListView(ListView):

@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../../../Projects/Letralibre/prueba/django-multiple-user-types-example/django_school/static"
+		},
+		{
+			"path": "../../../../../Projects/Letralibre/prueba/django-multiple-user-types-example/django_school/templates"
+		}
+	],
+	"settings": {}
+}

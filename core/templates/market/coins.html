@@ -5,7 +5,7 @@
 {% for coin in coin_list %} 
 <div class="text-center">
     <br>
-    <a href="{% url 'core:coin_list' coin.pk%}">
+    <a href="{% url 'core:coin_list' coin.pk %}">
         <button type="submit" class="btn btn-primary my-1 mx-auto">{{ coin.coin.name }}</button>
     </a>
     {% endfor %}
