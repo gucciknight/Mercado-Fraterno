@@ -1,20 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-
     <script>
     
         $(document).ready(function () {
             $('select').selectize({
-                sortField: 'text'
+                sortField: 'text',
             });
         });
-        </script>
+    </script>
+
 <div class="container pb-3">
     <h2><strong>Hola, {{ user.first_name }}!</strong></h2>
     <snap>{{actual_coin}} | Código #{{ coin_id }} | invitar a Participar</snap>
     <br>
     <br>
-    <h3>Saldo: <span class="numbers">{{ coin_balance }}</span></h3>
+    <h3 class="saldo-actual">Saldo: <span class="numbers">{{ coin_balance }}</span></h3>
     <br>
     <h3>Oferta:</h3><snap>{{ coin_offer }}</snap>
 </div>
@@ -27,29 +27,30 @@
         {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <div class="col">
-            <select id="input_1" name="coin_user" placeholder="Pick a state...">
-                <option value="">Select a state...</option>
+        <div class="col-sm">
+            <select id="input_1" name="coin_user" placeholder="Selecciona un miembro">
+                <option value=""></option>
                 {% for coin_users in coin_participants %}
                 <option value="{{coin_users.user.id}}">{{coin_users.user.first_name}} {{coin_users.user.last_name}}</option>
                 {% endfor %}
               </select>
         </div>
-        <div class="col">
+        <div class="col-sm">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
                 </div>
-                <input id="input_2" name="coin_ammount" value="a" type="text" class="form-control" >
+                <input id="input_2" name="coin_ammount" placeholder="Ingresa el monto a transferir" type="text" class="form-control" >
                 <div class="input-group-append">
                 </div>
               </div>
         </div>
-        <div class="col align mb-3"> 
+        <div class="col-sm mb-3 d-grid gap-2 mx-auto"> 
             <input class="btn btn-primary" type="submit" role="button" value="Transferir"/>
             
         </div>
       </form>
     </div>
+    <p class="text-right align-baseline"><a href="{% url 'home' %}"> volver</a></p>
 </div>
 {% endblock %}

@@ -56,25 +56,26 @@ def transference(request, coin_balance_id):
     
     try:
         reciever_user = User.objects.get(pk=request.POST["coin_user"])
-        ammount_transfered = request.POST["coin_ammount"]
+        ammount_transfered = int(request.POST["coin_ammount"])
     except (KeyError, CoinBalance.DoesNotExist):
-        return render(request, "market/market.html", {
-            "question": reciever_user,
-            "error_message": "No elegiste una respuesta"
-        })
+        return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id, )))
     else:
-        reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
-        reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)
+        coin_id = user_coin_balance.coin.pk
+        if ammount_transfered > (user_coin_balance.balance):
+            return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id, )))
+        else:
+            reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
+            reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)
 
-        user_coin_balance.balance = user_coin_balance.balance - int(ammount_transfered)
-        user_coin_balance.save()
-        reciever_coin_balance.balance = reciever_coin_balance.balance + int(ammount_transfered)
-        reciever_coin_balance.save()
+            user_coin_balance.balance = user_coin_balance.balance - ammount_transfered
+            user_coin_balance.save()
+            reciever_coin_balance.balance = reciever_coin_balance.balance + ammount_transfered
+            reciever_coin_balance.save()
         
-        new_transaction = Transaction(sender=user_coin_balance,reciever=reciever_coin_balance,ammount=ammount_transfered,date=datetime.now())
-        new_transaction.save()
+            new_transaction = Transaction(sender=user_coin_balance,reciever=reciever_coin_balance,ammount=ammount_transfered,date=datetime.now())
+            new_transaction.save()
 
-        return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
+            return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
 
 class TransactionView(DetailView):
     model = Transaction
@@ -82,9 +83,9 @@ class TransactionView(DetailView):
     template_name = 'market/transaction_detail.html'
 
     def get_context_data(self, **kwargs):
-        hola = self.get_object()
+        transaction_object = self.get_object()
         extra_context = {
-            "hola": hola
+            "transaction_object": transaction_object,
         }
         kwargs.update(extra_context)
         context = super().get_context_data(**kwargs)

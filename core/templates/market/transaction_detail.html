@@ -1,32 +1,26 @@
 {% extends 'base.html' %}
 {% block content %}
+<h2>{{ user.first_name }}, Tu transacción ha sido realizada con éxito</h2>
+<br><br>
+<p>Detalles:</p>
 <table class="table table-sm">
     <thead>
       <tr>
-        <th scope="col">#</th>
-        <th scope="col">First</th>
-        <th scope="col">Last</th>
-        <th scope="col">Handle</th>
+        <th scope="col">Envía</th>
+        <th scope="col">Recibe</th>
+        <th scope="col">Monto</th>
+        <th scope="col">Fecha</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td colspan="2">Larry the Bird</td>
-        <td>@twitter</td>
+        <td scope="row">{{ transaction_object.sender.user.first_name }} {{ transaction_object.sender.user.last_name }}</td>
+        <td>{{ transaction_object.reciever.user.first_name }} {{ transaction_object.reciever.user.last_name }}</td>
+        <td>{{ transaction_object.ammount }}</td>
+        <td>{{ transaction_object.date }}</td>
       </tr>
     </tbody>
   </table>
+  <br><br><br>
+  <p class="text-right align-baseline"><a href="{% url 'core:coin_list' transaction_object.sender.coin.pk %}"> volver</a></p>
 {% endblock %}

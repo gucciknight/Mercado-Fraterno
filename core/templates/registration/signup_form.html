@@ -5,11 +5,75 @@
 {% block content %}
   <div class="row">
     <div class="col-md-8 col-sm-10 col-12">
-      <h2>Sign up as a {{ user_type }}</h2>
+      <h2>Regístrate{{ user_type }}</h2>
       <form method="post" novalidate>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
-        {{ form|crispy }}
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Nombre</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+
+            </span>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Apellido</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+
+            </span>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Correo</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+
+            </span>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Contraseña</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+   
+            </span>
+          </div>
+        </div>
+        <div class="row g-3 align-items-center">
+          <div class="col-auto">
+            <label for="inputPassword6" class="col-form-label">Whatsapp</label>
+          </div>
+          <div class="col-auto">
+            <input type="password" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+          </div>
+          <div class="col-auto">
+            <span id="passwordHelpInline" class="form-text">
+
+            </span>
+          </div>
+        </div>
         <button type="submit" class="btn btn-success">Sign up</button>
       </form>
     </div>

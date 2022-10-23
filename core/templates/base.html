@@ -16,6 +16,21 @@
       width: 100%;
       height: 5vh;
     }
+
+    .homeButton {
+      max-width: 50% !important;
+      background-color: #652cb3;
+      border-color: #652cb3;
+    }
+    .homeButton:hover {
+      background-color: #fff;
+      color:#652cb3; 
+      border-color: #652cb3;
+    }
+    .btn-primary {
+      width: 100%; 
+    }
+
   </style>
   <body>
     <div class="card m-5 p-1 p-md-5 align-center mx-auto" style="width: 70%;">
@@ -30,7 +45,8 @@
     <script type="text/javascript">
       $(function () {
         $('[data-toggle="tooltip"]').tooltip();
-      })
+      });
+
       $(document).ready(function () {
         $('select').selectize({
             sortField: 'text'
@@ -38,9 +54,7 @@
     });
     </script>
     <script>
-      $("div.alert.alert-danger.alert-dismissible.fade.show")[0].click(function() {
-        $(this).find(".mb-0").text("Contraseña incorrecta");
-    });
+
     </script>
   </body>
 </html>
