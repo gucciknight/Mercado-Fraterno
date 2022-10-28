@@ -1,3 +1,4 @@
+import re
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -57,15 +58,17 @@ def transference(request, coin_balance_id):
     user_coin_balance = get_object_or_404(CoinBalance,pk=coin_balance_id)
     
     try:
-        reciever_user = User.objects.get(pk=request.POST["coin_user"])
-        ammount_transfered = int(request.POST["coin_ammount"])
+        data = request.POST.copy()
+        #data["coin_user"] = request.POST["coin_user"]
+        reciever_user = User.objects.get(pk=data["coin_user"])
+        ammount_transfered = int(data['coin_ammount'].replace('.',''))
     except (KeyError, CoinBalance.DoesNotExist):
         error_message = 'hola'
         return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id,)))
     else:
         coin_id = user_coin_balance.coin.pk
         if ammount_transfered > (user_coin_balance.balance):
-            error_message = 'error_message'
+
             return HttpResponseRedirect(reverse("core:coin_list", args=(coin_balance_id, )))
         else:
             reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)

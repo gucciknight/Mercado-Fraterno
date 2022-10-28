@@ -30,10 +30,18 @@
     .btn-primary {
       width: 100%; 
     }
+    .main {
+      width: 98%;
+    }
+    @media (min-width: 600px) {
+      .main {
+        width: 60%;
+      }
+    }
 
   </style>
   <body>
-    <div class="card m-5 p-1 p-md-5 align-center mx-auto" style="width: 70%;">
+    <div class="card m-1 p-1 p-md-5 align-center mx-auto main" style="">
       <div class="card-body ">
         {% block content %}
         {% endblock %}
@@ -59,8 +67,16 @@
             return false;
         }
       });
-
-      
+      $('input#input_2.form-control').keyup(function(event) {
+        // skip for arrow keys
+        if (event.which >= 37 && event.which <= 40) return;
+        // format number
+        $(this).val(function(index, value) {
+          return value
+            .replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        });
+      });   
     </script>
     <script>
 
