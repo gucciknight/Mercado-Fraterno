@@ -51,7 +51,16 @@
         $('select').selectize({
             sortField: 'text'
         });
-    });
+      });
+    
+      $('#post-form').submit(function() {
+        if ($.trim($("#input_1").val()) === "" || $.trim($("#input_2").val()) === "") {
+            alert('Faltan campos por llenar');
+            return false;
+        }
+      });
+
+      
     </script>
     <script>
 

@@ -8,6 +8,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
+
 # Create your views here.
 def home(request):
     #coin_list = Coin.objects.filter(coin = coin_balance_list)
@@ -22,6 +23,7 @@ def home(request):
     return render(request, 'home.html')
 
 class CoinListView(ListView):
+    
     def get_associated_coins(self):
         coin_list = self.request.coin.name
         return coin_list
@@ -58,11 +60,13 @@ def transference(request, coin_balance_id):
         reciever_user = User.objects.get(pk=request.POST["coin_user"])
         ammount_transfered = int(request.POST["coin_ammount"])
     except (KeyError, CoinBalance.DoesNotExist):
-        return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id, )))
+        error_message = 'hola'
+        return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id,)))
     else:
         coin_id = user_coin_balance.coin.pk
         if ammount_transfered > (user_coin_balance.balance):
-            return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id, )))
+            error_message = 'error_message'
+            return HttpResponseRedirect(reverse("core:coin_list", args=(coin_balance_id, )))
         else:
             reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
             reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)

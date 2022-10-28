@@ -6,7 +6,7 @@
 <div class="d-grid gap-2 text-center ">
     <br>
     <a href="{% url 'core:coin_list' coin.pk %}">
-        <button type="submit" class="homeButton btn btn-primary my-1 mx-auto">{{ coin.coin.name }}</button>
+        <button type="submit" value={} class="homeButton btn btn-primary my-1 mx-auto">{{ coin.coin.name }}</button>
     </a>
     {% endfor %}
 </div>
