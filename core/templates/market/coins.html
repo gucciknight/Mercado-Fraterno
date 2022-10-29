@@ -1,15 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="text-center">Hola {{ user_name }}!</h2>
+<br>
+<h2 class="text-center"><strong>¡Hola {{ user_name }}!</strong></h2>
+<br>
 {% for coin in coin_list %} 
-<div class="d-grid gap-2 text-center ">
-    <br>
+<div class="d-grid my-1 gap-2 text-center ">
     <a href="{% url 'core:coin_list' coin.pk %}">
-        <button type="submit" value={} class="homeButton btn btn-primary my-1 mx-auto">{{ coin.coin.name }}</button>
+        <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">{{ coin.coin.name }}</button>
     </a>
     {% endfor %}
 </div>
 <br>
 <a class="my-1" href="{% url 'logout' %}">log out</a>
+<br>
+<br>
 {% endblock %}

@@ -18,30 +18,46 @@
     }
 
     .homeButton {
-      max-width: 50% !important;
+      max-width: 98% !important;
       background-color: #652cb3;
       border-color: #652cb3;
     }
+
     .homeButton:hover {
       background-color: #fff;
       color:#652cb3; 
       border-color: #652cb3;
     }
+
+    .card-body {
+      padding: 0px;
+    }
+
     .btn-primary {
       width: 100%; 
     }
+
     .main {
       width: 98%;
     }
+
+    .numbers {
+
+    }
+
     @media (min-width: 600px) {
       .main {
         width: 60%;
+      }
+
+      .homeButton {
+        width: 70%
       }
     }
 
   </style>
   <body>
-    <div class="card m-1 p-1 p-md-5 align-center mx-auto main" style="">
+    <div class="card align-center mx-auto main" >
       <div class="card-body ">
         {% block content %}
         {% endblock %}
