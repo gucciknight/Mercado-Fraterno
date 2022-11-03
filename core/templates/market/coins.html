@@ -2,7 +2,8 @@
 
 {% block content %}
 <br>
-<h2 class="text-center"><strong>¡Hola {{ user_name }}!</strong></h2>
+<h2 class="text-center"><strong>Bienvenido</strong></h2>
+<h5 class="text-center">Ingresa a tu moneda</h5>
 <br>
 {% for coin in coin_list %} 
 <div class="d-grid my-1 gap-2 text-center ">
@@ -10,6 +11,9 @@
         <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">{{ coin.coin.name }}</button>
     </a>
     {% endfor %}
+    <a href="{% url 'core:create_coin' user.pk %}">
+        <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Crear nueva moneda</button>
+    </a>
 </div>
 <br>
 <a class="my-1" href="{% url 'logout' %}">log out</a>

@@ -14,3 +14,8 @@ class AdministratorSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+class CoinCreationForm(forms.ModelForm):
+    class Coin:
+        model = Participant
+        fields = ('text', )

@@ -1,4 +1,6 @@
 import re
+from tkinter import E
+from django.db.models import Exists, OuterRef, Q
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -9,6 +11,7 @@ from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
 
 from ..models import User, Participant, Administrator, Coin, CoinBalance, Transaction
+from core.forms import CoinCreationForm
 
 # Create your views here.
 def home(request):
@@ -42,13 +45,17 @@ class MarketView(DetailView):
         coin_offer = coin_balance.offer
         coin_participants_with_this_user = CoinBalance.objects.filter(coin = coin_balance.coin)
         coin_participants = coin_participants_with_this_user.exclude(user = coin_balance.user)
+        coin_history = Transaction.objects.filter(sender = coin_balance).order_by("-date")
+        coin_movements = Transaction.objects.filter(sender__coin_id = coin_id).order_by("-date")
         extra_context = {
             "actual_coin": actual_coin,
             "coin_id": coin_id,
             "coin_balance": balance,
             "coin_offer": coin_offer,
             "coin_participants": coin_participants,
-            "coin_balance_id": coin_balance.pk
+            "coin_balance_id": coin_balance.pk,
+            "coin_history": coin_history, 
+            "coin_movements": coin_movements,
         }
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
@@ -84,6 +91,7 @@ def transference(request, coin_balance_id):
 
             return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
 
+
 class TransactionView(DetailView):
     model = Transaction
     context_object_name = 'transaction_detail'
@@ -98,6 +106,14 @@ class TransactionView(DetailView):
         context = super().get_context_data(**kwargs)
         return context
     
+    
+class CoinCreationView(CreateView):
+    model = Coin
+    form_class = CoinCreationForm
+    context_object_name = 'coin_form'
+    template_name = 'market/createcoin.html'
+
+
 '''
 @method_decorator(login_required, name='dispatch')
 class CoinListView(ListView):

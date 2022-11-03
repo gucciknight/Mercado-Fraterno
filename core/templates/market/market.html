@@ -1,23 +1,22 @@
 {% extends 'base.html' %}
 {% block content %}
     <script>
-    
         $(document).ready(function () {
             $('select').selectize({
                 sortField: 'text',
             });
         });
     </script>
-
-<div class="container pb  p-md-5">
+<div >
+<div class="container pb p-md-5">
   <br>
-  <h2 style="margin-bottom:-5px" class=""><strong>Hola, {{ user.first_name }}!</strong></h2>
+  <h2 style="margin-bottom:-5px" class=""><strong>¡Hola, {{ user.first_name }}!</strong></h2>
   <div style="font-size:13px">
     <snap>{{actual_coin}} | Código #{{ coin_id }} | invitar a Participar</snap>
     <br>
     <br>
     {% load humanize %}
-    <h4 class="saldo-actual"><strong>Saldo</strong> <span class="numbers"><br>{{ coin_balance|intcomma }}</span></h4>
+    <h4 class="saldo-actual"><strong>Saldo</strong> <span class="numbers">{{ coin_balance|intcomma }}</span></h4>
   </div>
     <br>
     <h4><strong>Oferta</strong> </h4><snap>{{ coin_offer }}</snap>
@@ -59,22 +58,83 @@
     <br>
     <p class="text-right align-baseline"><a href="{% url 'home' %}"> volver</a></p>
   </div>
-
+</div>
 <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
     <li class="col-4 nav-item text-center">
       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Movimiento</a>
     </li>
     <li class="col-4 nav-item text-center">
-      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Historial</a>
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Mi Historial</a>
     </li>
     <li class="col-4 nav-item text-center">
       <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
     </li>
   </ul>
-  <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"></div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"></div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"></div>
+  <div class="tab-content px-5 mx-auto" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+      <table id="dynamic-table-1" class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Envía</th>
+            <th scope="col">Recibe</th>
+            <th scope="col">Monto</th>
+            <th scope="col">Fecha</th>
+          </tr>
+        </thead>
+          <tbody>
+          {% for transactions in coin_movements %}
+          <tr>
+            <td scope="row">{{ transactions.sender.user.first_name }} {{ transactions.sender.user.last_name }}</td>
+            <td scope="row">{{ transactions.reciever.user.first_name }} {{ transactions.reciever.user.last_name }}</td>
+            <td>{{ transactions.ammount|intcomma }}</td>
+            <td>{{ transactions.date }}
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+      <table id="dynamic-table-2" class="table table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Participante</th>
+          <th scope="col">Monto</th>
+          <th scope="col">Fecha</th>
+        </tr>
+      </thead>
+        <tbody>
+        {% for transactions in coin_history %}
+        <tr>
+          <td scope="row">{{ transactions.reciever.user.first_name }} {{ transactions.reciever.user.last_name }}</td>
+          <td>{{ transactions.ammount|intcomma }}</td>
+          <td>{{ transactions.date }}
+        </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <table id="dynamic-table-3" class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Código</th>
+            <th scope="col">Saldo</th>
+            <th scope="col">Teléfono</th>
+          </tr>
+        </thead>
+          <tbody>
+          {% for participant in coin_participants %}
+          <tr>
+            <td scope="row">{{ participant.user.first_name }} {{ participant.user.last_name }}</td>
+            <td>{{ participant.pk }}</td>
+            <td>{{ participant.balance|intcomma }}</td>
+            <td>{{ participant.user.whatsapp }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
 
 {% endblock %}
