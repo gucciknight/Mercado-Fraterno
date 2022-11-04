@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>{{ user.first_name }}, Tu transacción ha sido realizada con éxito</h2>
+<h2>{{ user.first_name }}, estás a punto de hacer una transferencia a {{ transaction_object.reciever.user.first_name }} {{ transaction_object.reciever.user.last_name }}</h2>
 <br><br>
 <p>Detalles:</p>
 <table class="table table-sm">

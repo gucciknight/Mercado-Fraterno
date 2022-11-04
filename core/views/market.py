@@ -62,7 +62,7 @@ class MarketView(DetailView):
 
 def transference(request, coin_balance_id):
 
-    user_coin_balance = get_object_or_404(CoinBalance,pk=coin_balance_id)
+    user_coin_balance = get_object_or_404(CoinBalance, pk=coin_balance_id)
     
     try:
         data = request.POST.copy()
@@ -70,7 +70,6 @@ def transference(request, coin_balance_id):
         reciever_user = User.objects.get(pk=data["coin_user"])
         ammount_transfered = int(data['coin_ammount'].replace('.',''))
     except (KeyError, CoinBalance.DoesNotExist):
-        error_message = 'hola'
         return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id,)))
     else:
         coin_id = user_coin_balance.coin.pk
