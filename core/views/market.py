@@ -1,5 +1,6 @@
 import re
 from tkinter import E
+from django import forms
 from django.db.models import Exists, OuterRef, Q
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
@@ -45,8 +46,8 @@ class MarketView(DetailView):
         coin_offer = coin_balance.offer
         coin_participants_with_this_user = CoinBalance.objects.filter(coin = coin_balance.coin)
         coin_participants = coin_participants_with_this_user.exclude(user = coin_balance.user)
-        coin_history = Transaction.objects.filter(sender = coin_balance).order_by("-date")
-        coin_movements = Transaction.objects.filter(sender__coin_id = coin_id).order_by("-date")
+        coin_history = Transaction.objects.filter(sender = coin_balance).filter(is_validated=True).order_by("-date")
+        coin_movements = Transaction.objects.filter(sender__coin_id = coin_id).filter(is_validated=True).order_by("-date")
         extra_context = {
             "actual_coin": actual_coin,
             "coin_id": coin_id,
@@ -70,6 +71,7 @@ def transference(request, coin_balance_id):
         reciever_user = User.objects.get(pk=data["coin_user"])
         ammount_transfered = int(data['coin_ammount'].replace('.',''))
     except (KeyError, CoinBalance.DoesNotExist):
+        error_message = 'hola'
         return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id,)))
     else:
         coin_id = user_coin_balance.coin.pk
@@ -77,6 +79,7 @@ def transference(request, coin_balance_id):
 
             return HttpResponseRedirect(reverse("core:coin_list", args=(coin_balance_id, )))
         else:
+            
             reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
             reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)
 
@@ -85,9 +88,9 @@ def transference(request, coin_balance_id):
             reciever_coin_balance.balance = reciever_coin_balance.balance + ammount_transfered
             reciever_coin_balance.save()
         
-            new_transaction = Transaction(sender=user_coin_balance,reciever=reciever_coin_balance,ammount=ammount_transfered,date=datetime.now())
+            new_transaction = Transaction(sender=user_coin_balance, reciever=reciever_coin_balance, ammount=ammount_transfered, date=datetime.now(), is_validated=False)
             new_transaction.save()
-
+            
             return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
 
 

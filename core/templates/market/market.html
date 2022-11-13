@@ -7,9 +7,8 @@
             });
         });
     </script>
-<div >
-<div class="container pb p-md-5">
-  <br>
+<div class="h-100">
+<div class="container h-50 p-md-4">
   <h2 style="margin-bottom:-5px" class=""><strong>¡Hola, {{ user.first_name }}!</strong></h2>
   <div style="font-size:13px">
     <snap>{{actual_coin}} | Código #{{ coin_id }} | invitar a Participar</snap>
@@ -22,7 +21,7 @@
     <h4><strong>Oferta</strong> </h4><snap>{{ coin_offer }}</snap>
 </div>
 
-<div class="container bg-light py-4 p-md-5">
+<div class="container h-50 bg-light p-4 p-md-4">
   <h4 style="py-2"><strong>Transferir</strong></h4><br>
   <form action="{% url 'core:detail_view' coin_balance_id %}" method="post" id="post-form" class="transaction-form">
     <div class="row ">
@@ -70,7 +69,7 @@
       <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
     </li>
   </ul>
-  <div class="tab-content mx-auto" id="pills-tabContent">
+  <div class="tab-content mx-auto p-1" id="pills-tabContent">
     <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
       <table id="dynamic-table-1" class="table table-sm">
         <thead>

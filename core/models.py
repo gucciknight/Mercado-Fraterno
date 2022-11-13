@@ -34,3 +34,4 @@ class Transaction(models.Model):
     reciever = models.ForeignKey(CoinBalance, on_delete=models.CASCADE, related_name='reciever_user')
     ammount = models.IntegerField()
     date = models.DateTimeField("transaction datails")
+    is_validated = models.BooleanField()
