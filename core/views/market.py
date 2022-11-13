@@ -35,7 +35,7 @@ class CoinListView(ListView):
 
 class MarketView(DetailView):
     model = CoinBalance
-    context_object_name = 'transaction_market'
+    context_object_name = 'coin_balance'
     template_name = 'market/market.html'
 
     def get_context_data(self,**kwargs):
@@ -93,7 +93,6 @@ def transference(request, coin_balance_id):
             
             return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
 
-
 class TransactionView(DetailView):
     model = Transaction
     context_object_name = 'transaction_detail'
@@ -107,6 +106,16 @@ class TransactionView(DetailView):
         kwargs.update(extra_context)
         context = super().get_context_data(**kwargs)
         return context
+
+def transference_validated(request, transaction_id):
+
+    transaction = get_object_or_404(CoinBalance, pk=transaction_id)
+    transaction.update(is_validated=True)
+
+    coin_balance = CoinBalance.objects.get(coin_id = transaction.sender_id)
+    return render(request, 'core:market', {
+        'coin_balance': coin_balance,
+    })
     
     
 class CoinCreationView(CreateView):
