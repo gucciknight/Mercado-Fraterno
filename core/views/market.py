@@ -82,12 +82,12 @@ def transference(request, coin_balance_id):
             
             reciever_coin_balances = CoinBalance.objects.filter(user=reciever_user)
             reciever_coin_balance = reciever_coin_balances.get(coin=user_coin_balance.coin)
-
+            '''
             user_coin_balance.balance = user_coin_balance.balance - ammount_transfered
             user_coin_balance.save()
             reciever_coin_balance.balance = reciever_coin_balance.balance + ammount_transfered
             reciever_coin_balance.save()
-        
+            '''
             new_transaction = Transaction(sender=user_coin_balance, reciever=reciever_coin_balance, ammount=ammount_transfered, date=datetime.now(), is_validated=False)
             new_transaction.save()
             
@@ -108,16 +108,31 @@ class TransactionView(DetailView):
         return context
 
 def transference_validated(request, transaction_id):
+    transaction = get_object_or_404(Transaction, pk=transaction_id)
+    user_coin_balance = get_object_or_404(CoinBalance, pk=transaction.sender.pk)
+    reciever_coin_balance = get_object_or_404(CoinBalance, pk=transaction.reciever.pk)
 
-    transaction = get_object_or_404(CoinBalance, pk=transaction_id)
-    transaction.update(is_validated=True)
-
-    coin_balance = CoinBalance.objects.get(coin_id = transaction.sender_id)
-    return render(request, 'core:market', {
-        'coin_balance': coin_balance,
+    user_coin_balance.balance = user_coin_balance.balance - transaction.ammount
+    user_coin_balance.save()
+    reciever_coin_balance.balance = reciever_coin_balance.balance + transaction.ammount
+    reciever_coin_balance.save()
+    
+    transaction.is_validated = True
+    transaction.save()
+    '''
+    return render(request, 'market/market.html', {
+        'coin_balance': user_coin_balance,
     })
+    ''' 
+    return HttpResponseRedirect(reverse("core:coin_list", args=(user_coin_balance.pk,)))
     
+def transference_denied(request, transaction_id):
+    transaction = get_object_or_404(Transaction, pk=transaction_id)
+    user_coin_balance = get_object_or_404(CoinBalance, pk=transaction.sender.pk)
     
+    return HttpResponseRedirect(reverse("core:coin_list", args=(user_coin_balance.pk,)))
+
+
 class CoinCreationView(CreateView):
     model = Coin
     form_class = CoinCreationForm

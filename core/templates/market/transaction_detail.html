@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block content %}
-<div class="p-4">
+<div class="p-2 p-md-4">
 <h3>{{ user.first_name }}, estás a punto de hacer una transferencia a {{ transaction_object.reciever.user.first_name }} {{ transaction_object.reciever.user.last_name }}</h3>
 
 <div class="container py-5">
@@ -31,12 +31,15 @@
   <table class="table">
     <tbody>
         <td>
-          <input class="btn btn-primary btn-danger" type="submit" role="button" value="Cancelar" id="deny-transference"/>
+          <a href="{% url 'core:validation_denied' transaction_object.pk %}">
+            <input class="btn btn-primary btn-danger" type="submit" role="button" value="Cancelar" id="deny-transference"/>
+          </a>
         </td>
         <td>
-          <input class="btn btn-primary btn-success" type="submit" role="button" value="Aceptar" id="confirm-transference"/>
+          <a href="{% url 'core:validation_accepted' transaction_object.pk %}">
+            <input class="btn btn-primary btn-success" type="submit" role="button" value="Aceptar" id="confirm-transference"/>
+          </a>
         </td>
-        
         </tr>
       </tr>
       <tr>
