@@ -1,8 +1,18 @@
 {% extends 'base.html' %}
-
 {% load crispy_forms_tags %}
-
 {% block content %}
+<div class="m-1 m-md-4">
+<form method='POST'>
+    {%csrf_token%}
+    {{form|crispy}}
+<button class="btn" type='submit'>Submit</button>
+¿Ya tienes una cuenta? <a href="{% url 'login' %}">Login</a>
+</form>
+</div>
+{% endblock %}
+{#% load crispy_forms_tags %#}
+
+<!--
   <div class="row">
     <div class="col-md-8 col-sm-10 col-12">
       <h2>Regístrate{{ user_type }}</h2>
@@ -78,4 +88,5 @@
       </form>
     </div>
   </div>
-{% endblock %}
+-->
+

@@ -28,7 +28,6 @@ class CoinBalance(models.Model):
     balance = models.IntegerField()
     
 
-
 class Transaction(models.Model):
     sender = models.ForeignKey(CoinBalance, on_delete=models.CASCADE, related_name='sender_user')
     reciever = models.ForeignKey(CoinBalance, on_delete=models.CASCADE, related_name='reciever_user')

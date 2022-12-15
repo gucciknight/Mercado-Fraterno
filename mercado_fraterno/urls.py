@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', administrator.AdministratorSignUpView.as_view(), name='signup')
+    path('accounts/signup/', administrator.SignUpView.as_view(), name='signup')
     #path('')
     #path(signup, core.)
 ]

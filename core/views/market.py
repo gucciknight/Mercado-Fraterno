@@ -61,6 +61,8 @@ class MarketView(DetailView):
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
 
+
+@login_required
 def transference(request, coin_balance_id):
 
     user_coin_balance = get_object_or_404(CoinBalance, pk=coin_balance_id)
@@ -75,7 +77,7 @@ def transference(request, coin_balance_id):
         return HttpResponseRedirect(reverse("core:coin_list", args=(coin_id,)))
     else:
         coin_id = user_coin_balance.coin.pk
-        if ammount_transfered > (user_coin_balance.balance):
+        if (ammount_transfered > user_coin_balance.balance) or (ammount_transfered == 0):
 
             return HttpResponseRedirect(reverse("core:coin_list", args=(coin_balance_id, )))
         else:

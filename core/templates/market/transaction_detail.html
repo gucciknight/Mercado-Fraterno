@@ -19,7 +19,7 @@
       <tr>
         <td scope="row">{{ transaction_object.sender.user.first_name }} {{ transaction_object.sender.user.last_name }}</td>
         <td>{{ transaction_object.reciever.user.first_name }} {{ transaction_object.reciever.user.last_name }}</td>
-        <td>{{ transaction_object.ammount|intcomma }}</td>
+        <td>${{ transaction_object.ammount|intcomma }}</td>
         <td>{{ transaction_object.date }}</td>
       </tr>
     </tbody>
