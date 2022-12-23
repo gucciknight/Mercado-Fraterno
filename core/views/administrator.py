@@ -30,5 +30,9 @@ class SignUpView(CreateView):
         coin = Coin.objects.get(pk = self.request.POST['coins'])
         new_coin_balance = CoinBalance(user=user, coin=coin, offer=self.request.POST['offer'], balance=coin.base_quantity)
         new_coin_balance.save()
+        coin_list = CoinBalance.objects.filter(user=user)
         login(self.request, user)
-        return render(self.request, 'market/coins.html')
+        return render(self.request, 'market/coins.html', {
+            "user" : user,
+            "coin_list" : coin_list,
+        })
