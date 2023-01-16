@@ -139,7 +139,7 @@ class CoinCreationView(CreateView):
     model = Coin
     form_class = CoinCreationForm
     context_object_name = 'coin_form'
-    template_name = 'market/createcoin.html'
+    template_name = 'coins/new_coin.html'
 
 
 '''

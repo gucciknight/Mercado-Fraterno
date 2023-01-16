@@ -19,6 +19,7 @@ class Administrator(models.Model):
 class Coin(models.Model):
     name = models.CharField(max_length=20)
     base_quantity = models.IntegerField()
+    is_validated = models.BooleanField(default=False)
 
 
 class CoinBalance(models.Model):
@@ -26,6 +27,7 @@ class CoinBalance(models.Model):
     coin = models.ForeignKey(Coin, on_delete=models.CASCADE, related_name='user_balance')
     offer = models.CharField(max_length=10000)
     balance = models.IntegerField()
+    first_transaction_made = models.BooleanField(default=False)
     
 
 class Transaction(models.Model):

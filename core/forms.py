@@ -20,6 +20,8 @@ class SignUpForm(UserCreationForm):
         
 
 class CoinCreationForm(forms.ModelForm):
-    class Coin:
-        model = Participant
-        fields = ('text', )
+    name = forms.CharField(max_length=32, label='Nombre')
+    #caca = forms.CharField(max_length=32, label='Nombre')
+    class Meta:
+        model = Coin
+        fields = ('name', 'base_quantity',)

@@ -33,7 +33,7 @@
             <select id="input_1" name="coin_user" placeholder="Selecciona un miembro">
                 <option value=""></option>
                 {% for coin_users in coin_participants %}
-                <option value="{{coin_users.user.id}}">{{coin_users.user.first_name}} {{coin_users.user.last_name}}</option>
+                <option value="{{coin_users.user.id}}">{{coin_users.user.first_name}} {{coin_users.user.last_name}} <!-- <span style="color:grey !important; font-size:10px;"> - {{coin_users.user.username}} --></span></option>
                 {% endfor %}
               </select>
         </div>
