@@ -9,7 +9,7 @@
     </script>
 <div class="h-100">
 <div class="container h-50 p-md-4">
-  <h3 style="margin-bottom:-5px" class="">{{ user.first_name }} {{ user.last_name}} - <strong>{{ user.username }}</strong></h3>
+  <h3 style="margin-bottom:-5px" class="">{{ user.first_name }} {{ user.last_name}} - <strong>{{ user.email }}</strong></h3>
   <div style="font-size:13px">
     <snap>{{actual_coin}} | Código #{{ coin_id }} | invitar a Participar</snap>
     <br>
@@ -55,7 +55,7 @@
     </div>
     <br>
     <br>
-    <p class="text-right align-baseline"><a href="{% url 'home' %}"> volver</a></p>
+    <p class="text-center align-baseline"><a href="{% url 'home' %}"> volver</a></p>
   </div>
 </div>
 <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
@@ -105,7 +105,7 @@
         {% for transactions in coin_history %}
         <tr>
           <td scope="row">{{ transactions.reciever.user.first_name }} {{ transactions.reciever.user.last_name }}</td>
-          <td>${{ transactions.ammount|intcomma }}</td>
+          <td>-${{ transactions.ammount|intcomma }}</td>
           <td>{{ transactions.date }}
         </tr>
       {% endfor %}
@@ -117,7 +117,7 @@
         <thead>
           <tr>
             <th scope="col">Nombre</th>
-            <th scope="col">Código</th>
+            <th scope="col">Email</th>
             <th scope="col">Saldo</th>
             <th scope="col">Teléfono</th>
           </tr>
@@ -126,7 +126,7 @@
           {% for participant in coin_participants %}
           <tr>
             <td scope="row">{{ participant.user.first_name }} {{ participant.user.last_name }}</td>
-            <td>{{ participant.pk }}</td>
+            <td>{{ participant.user.email }}</td>
             <td>${{ participant.balance|intcomma }}</td>
             <td>{{ participant.user.whatsapp }}</td>
           </tr>
