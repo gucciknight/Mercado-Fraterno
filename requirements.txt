@@ -1,0 +1,10 @@
+asgiref @ file:///home/conda/feedstock_root/build_artifacts/asgiref_1671589829431/work
+Django @ file:///home/conda/feedstock_root/build_artifacts/django_1675714095485/work
+django-crispy-forms @ file:///home/conda/feedstock_root/build_artifacts/django-crispy-forms_1643108807664/work
+django-extensions==3.2.1
+flake8==6.0.0
+mccabe==0.7.0
+pycodestyle==2.10.0
+pyflakes==3.0.1
+sqlparse @ file:///home/conda/feedstock_root/build_artifacts/sqlparse_1663990453245/work
+typing_extensions @ file:///home/conda/feedstock_root/build_artifacts/typing_extensions_1665144421445/work
