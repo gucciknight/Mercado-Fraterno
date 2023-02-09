@@ -31,5 +31,5 @@ blocks:
             - python manage.py check --deploy
         - name: Style
           commands:
-            - sudo apt install flake8
+            - sudo pip install flake8
             - flake8 Mercado-Fraterno/ --max-line-length=127
