@@ -1,20 +1,9 @@
-<<<<<<< HEAD
-asgiref 
-Django 
-=======
-asgiref
 Django
->>>>>>> 07c49f7f59fde6ad0d41489f8cd5bd68069bc9b7
 django-crispy-forms
 django-extensions==3.2.1
 flake8==6.0.0
 mccabe==0.7.0
 pycodestyle==2.10.0
 pyflakes==3.0.1
-<<<<<<< HEAD
 sqlparse 
 typing_extensions 
-=======
-sqlparse
-typing_extensions
->>>>>>> 07c49f7f59fde6ad0d41489f8cd5bd68069bc9b7
