@@ -21,15 +21,14 @@ blocks:
       jobs:
         - name: Unit test
           commands:
-            - cd Mercado-Fraterno
-            - python manage.py makemigrations
-            - python manage.py migrate
-            - python manage.py test
+            - sem-version python 3.9
+            - checkout
+            - cache restore
+            - pip install --cache-dir .pip_cache -r requirements.txt
         - name: Deploy checklist
           commands:
-            - cd Mercado-Fraterno
             - python manage.py check --deploy
         - name: Style
           commands:
-            - pip install flake8
+            - apt install flake8
             - flake8 martor_demo/ --max-line-length=127
