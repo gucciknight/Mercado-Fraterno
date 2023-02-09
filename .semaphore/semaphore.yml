@@ -33,3 +33,4 @@ blocks:
           commands:
             - sudo pip install flake8
             - flake8 Mercado-Fraterno/ --max-line-length=127
+            - 'Y'
