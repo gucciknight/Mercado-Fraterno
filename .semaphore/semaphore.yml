@@ -21,12 +21,13 @@ blocks:
       jobs:
         - name: Unit test
           commands:
-            - sem-version python 3.9
-            - checkout
-            - cache restore
-            - pip install --cache-dir .pip_cache -r requirements.txt
+            - cd Mercado-Fraterno
+            - python manage.py makemigrations
+            - python manage.py migrate
+            - python manage.py test
         - name: Deploy checklist
           commands:
+            - cd Mercado-Fraterno
             - python manage.py check --deploy
         - name: Style
           commands:
