@@ -6,13 +6,16 @@ from core.models import ( Participant, Administrator,
                         Coin, CoinBalance, Transaction, User)
 
 class SignUpForm(UserCreationForm):
-    whatsapp = forms.CharField(max_length=8, help_text='Número de 8 dígitos, sin código de país ni anteponer 9', label='Número de Celular')
+    whatsapp = forms.CharField(max_length=8, help_text='Número de 8 dígitos, sin código de país ni anteponer 9',
+                               label='Número de Celular')
     first_name = forms.CharField(max_length=32, label='Nombre')
     last_name = forms.CharField(max_length=32, label='Apellido')
     username = forms.HiddenInput
     email = forms.CharField()
-    coins = forms.ChoiceField(widget=forms.Select, choices=Coin.objects.all().values_list('id', 'name'), label='Moneda a la que quiere participar')
-    offer = forms.CharField(max_length=50, help_text='Nombre de forma breve, lo que va a ofrecer en mercado fraterno', label='Que voy a ofrecer')
+    coins = forms.ChoiceField(widget=forms.Select, choices=Coin.objects.all().values_list('id', 'name'), 
+                              label='Moneda a la que quiere participar')
+    offer = forms.CharField(max_length=50, help_text='Nombre de forma breve, lo que va a ofrecer en mercado fraterno', 
+                            label='Que voy a ofrecer')
 
     class Meta(UserCreationForm.Meta):
         model = User

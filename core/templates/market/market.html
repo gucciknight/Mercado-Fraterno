@@ -9,9 +9,9 @@
     </script>
 <div class="h-100">
 <div class="container h-50 p-md-4">
-  <h3 style="margin-bottom:-5px" class="">{{ user.first_name }} {{ user.last_name}} - <strong>{{ user.email }}</strong></h3>
+  <h3 style="margin-bottom:-5px" class="">{{ user.first_name }} {{ user.last_name}}</h3>
   <div style="font-size:13px">
-    <snap>{{actual_coin}} | Código #{{ coin_id }} | invitar a Participar</snap>
+    <snap>{{actual_coin}} | Código #{{ coin_id }} | {{ user.email }}<!--| invitar a Participar--></snap>
     <br>
     <br>
     {% load humanize %}
@@ -29,15 +29,15 @@
         {% if error_message %}
         <p><strong>{{ error_message }}</strong></p>
         {% endif %}
-        <div class="col-sm">
+        <div class="col-sm-6">
             <select id="input_1" name="coin_user" placeholder="Selecciona un miembro">
                 <option value=""></option>
                 {% for coin_users in coin_participants %}
-                <option value="{{coin_users.user.id}}">{{coin_users.user.first_name}} {{coin_users.user.last_name}} <!-- <span style="color:grey !important; font-size:10px;"> - {{coin_users.user.username}} --></span></option>
+                <option value="{{coin_users.user.id}}">{{coin_users.user.first_name}} {{coin_users.user.last_name}} <div style="color:grey !important; font-size:10px;"> - {{coin_users.user.email}} </div></option>
                 {% endfor %}
               </select>
         </div>
-        <div class="col-sm">
+        <div class="col-sm-3">
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                   <span class="input-group-text">$</span>
@@ -47,7 +47,7 @@
                 </div>
               </div>
         </div>
-        <div class="col-sm mb-3 d-grid gap-2 mx-auto"> 
+        <div class="col-sm-3 mb-3 d-grid gap-2 mx-auto"> 
             <input class="btn btn-primary" type="submit" role="button" value="Transferir" id="submit-transference"/>
             
         </div>
@@ -165,7 +165,14 @@
             <td scope="row">{{ participant.user.first_name }} {{ participant.user.last_name }}</td>
             <td>{{ participant.user.email }}</td>
             <td>{{ participant.user.whatsapp }}</td>
-            <td>{{ participant.user.whatsapp }}</td>
+            <td>
+              <a href="">
+                <span style="color:green;text-decoration:none">Aceptar</span> 
+              </a>
+              <a href="">
+                <span style="color:red">Rechazar</span> 
+              </a>
+            </td>
           </tr>
         {% endfor %}
         </tbody>
