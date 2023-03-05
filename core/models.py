@@ -68,7 +68,7 @@ class CoinBalance(models.Model):
     coin = models.ForeignKey(Coin, on_delete=models.CASCADE, related_name='user_balance')
     offer = models.CharField(max_length=10000)
     balance = models.IntegerField()
-    first_transaction_made = models.BooleanField(default=False)
+    transactions_made = models.IntegerField(default=False)
     
 
 class Transaction(models.Model):

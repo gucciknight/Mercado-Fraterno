@@ -16,7 +16,7 @@ class SignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = [ 'first_name', 'last_name', 'password1', 'password2', 'whatsapp', 'email', 'coins']
+        fields = [ 'first_name', 'last_name', 'email', 'password1', 'password2', 'whatsapp', 'coins']
 
     def clean_email(self):
         email = self.cleaned_data["email"]
