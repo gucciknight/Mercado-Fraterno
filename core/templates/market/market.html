@@ -59,6 +59,20 @@
   </div>
 </div>
 <ul class="nav nav-pills my-3" id="pills-tab" role="tablist">
+  {% if user.is_staff %}
+    <li class="col-3 nav-item text-center">
+      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#transacciones" role="tab" aria-controls="pills-home" aria-selected="true">Transacciones</a>
+    </li>
+    <li class="col-3 nav-item text-center">
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#mi-historial" role="tab" aria-controls="pills-profile" aria-selected="false">Mi Historial</a>
+    </li>
+    <li class="col-3 nav-item text-center">
+      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#participantes" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
+    </li>
+    <li class="col-3 nav-item text-center">
+      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#solicitudes" role="tab" aria-controls="pills-contact" aria-selected="false">Solicitudes</a>
+    </li>
+    {% else %}
     <li class="col-4 nav-item text-center">
       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Transacciones</a>
     </li>
@@ -68,9 +82,10 @@
     <li class="col-4 nav-item text-center">
       <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
     </li>
+    {% endif %}
   </ul>
   <div class="tab-content mx-auto p-1" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+    <div class="tab-pane fade show active" id="transacciones" role="tabpanel" aria-labelledby="pills-home-tab">
       <table id="dynamic-table-1" class="table table-sm">
         <thead>
           <tr>
@@ -92,7 +107,7 @@
         </tbody>
       </table>
     </div>
-    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    <div class="tab-pane fade" id="mi-historial" role="tabpanel" aria-labelledby="pills-profile-tab">
       <table id="dynamic-table-2" class="table table-sm">
       <thead>
         <tr>
@@ -112,7 +127,7 @@
       </tbody>
       </table>
     </div>
-    <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+    <div class="tab-pane fade" id="participantes" role="tabpanel" aria-labelledby="pills-contact-tab">
       <table id="dynamic-table-3" class="table table-sm">
         <thead>
           <tr>
@@ -134,6 +149,27 @@
         </tbody>
       </table>
     </div>
+    <div class="tab-pane fade" id="solicitudes" role="tabpanel" aria-labelledby="pills-contact-tab">
+      <table id="dynamic-table-4" class="table table-sm">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Email</th>
+            <th scope="col">Teléfono</th>
+            <th scope="col">Estado</th>
+          </tr>
+        </thead>
+          <tbody>
+          {% for participant in coin_participants %}
+          <tr>
+            <td scope="row">{{ participant.user.first_name }} {{ participant.user.last_name }}</td>
+            <td>{{ participant.user.email }}</td>
+            <td>{{ participant.user.whatsapp }}</td>
+            <td>{{ participant.user.whatsapp }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
   </div>
-
 {% endblock %}
