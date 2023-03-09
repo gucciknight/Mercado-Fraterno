@@ -11,7 +11,7 @@
 <div class="container h-50 p-md-4">
   <h3 style="margin-bottom:-5px" class="">{{ user.first_name }} {{ user.last_name}}</h3>
   <div style="font-size:13px">
-    <snap>{{actual_coin}} | Código #{{ coin_id }} | {{ user.email }}<!--| invitar a Participar--></snap>
+    <snap>{{actual_coin}} | {{ user.email }}<!--| invitar a Participar--></snap>
     <br>
     <br>
     {% load humanize %}
@@ -74,13 +74,13 @@
     </li>
     {% else %}
     <li class="col-4 nav-item text-center">
-      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Transacciones</a>
+      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#transacciones" role="tab" aria-controls="pills-home" aria-selected="true">Transacciones</a>
     </li>
     <li class="col-4 nav-item text-center">
-      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Mi Historial</a>
+      <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#mi-historial" role="tab" aria-controls="pills-profile" aria-selected="false">Mi Historial</a>
     </li>
     <li class="col-4 nav-item text-center">
-      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
+      <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#participantes" role="tab" aria-controls="pills-contact" aria-selected="false">Participantes</a>
     </li>
     {% endif %}
   </ul>
