@@ -11,6 +11,7 @@ class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=32, label='Nombre')
     last_name = forms.CharField(max_length=32, label='Apellido')
     username = forms.HiddenInput
+    is_validated = forms.HiddenInput
     email = forms.CharField()
     coins = forms.ChoiceField(widget=forms.Select, choices=Coin.objects.all().values_list('id', 'name'), 
                               label='Moneda a la que quiere participar')
