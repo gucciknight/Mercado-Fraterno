@@ -44,7 +44,7 @@ class User(AbstractUser):
     whatsapp = models.CharField(max_length=30)
     email = models.EmailField(_('email address'), unique=True)
     objects = UserManager()
-    is_validated = models.BooleanField(_("is validated"))
+    is_validated = models.BooleanField(_("is validated"), default=False)
     
 
 class Participant(models.Model):
