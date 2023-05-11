@@ -5,7 +5,7 @@ from django.db.models import Exists, OuterRef, Q
 from datetime import datetime
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
@@ -23,7 +23,7 @@ def home(request):
         coin_list = CoinBalance.objects.filter(user=request.user)
         return render(request, 'market/coins.html', {
             "user_name": user_name,
-            "coin_list": coin_list
+            "coin_list": coin_list,
         })
     return render(request, 'home.html')
 

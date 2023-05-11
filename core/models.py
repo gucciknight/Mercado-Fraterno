@@ -44,7 +44,6 @@ class User(AbstractUser):
     whatsapp = models.CharField(max_length=30)
     email = models.EmailField(_('email address'), unique=True)
     objects = UserManager()
-    is_validated = models.BooleanField(_("is validated"), default=False)
     
 
 class Participant(models.Model):
@@ -55,7 +54,6 @@ class Participant(models.Model):
 class Administrator(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     USERNAME_FIELD = 'email'
-
 
 
 class Coin(models.Model):
@@ -69,7 +67,8 @@ class CoinBalance(models.Model):
     coin = models.ForeignKey(Coin, on_delete=models.CASCADE, related_name='user_balance')
     offer = models.CharField(max_length=10000)
     balance = models.IntegerField()
-    transactions_made = models.IntegerField(default=False)
+    first_transaction_made = models.BooleanField( default=False)
+    is_valid = models.BooleanField( default=False)
     
 
 class Transaction(models.Model):

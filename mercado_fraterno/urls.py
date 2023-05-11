@@ -23,7 +23,9 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('accounts/', include('django.contrib.auth.urls')),
-    path('accounts/signup/', administrator.SignUpView.as_view(), name='signup')
+    path('accounts/signup/', administrator.SignUpView.as_view(), name='signup'),
+    ##path('accounts/signup/<int:coin_id>', administrator.SignUpViewInvitation.as_view(), name='signup-invitation')
+    
     #path('')
     #path(signup, core.)
 ]

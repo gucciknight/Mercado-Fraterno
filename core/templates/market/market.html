@@ -166,7 +166,7 @@
             <td>{{ participant.user.email }}</td>
             <td>{{ participant.user.whatsapp }}</td>
             <td>
-              <a href="">
+              <a href="{% url 'core:user_validation' coin_balance_id %}">
                 <span style="color:green;text-decoration:none">Aceptar</span> 
               </a>
               <a href="">

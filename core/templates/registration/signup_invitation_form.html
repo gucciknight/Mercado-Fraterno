@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags%}
+{% block content %}
+<h2 class="text-center py-3">¡Has sido invitado a la moneda xxx!</h2>
+<div class="text-center px-md-5 px-1 mx-1 mx-md-5"><snap>Anota tus tus datos en el formulario, luego te llegará un correo que confirmará tu inscripción </snap></div>
+
+<div class=" w-100 row py-4 justify-content-center">
+    <div class="col-md-8 col-sm-10 col-12">
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}">
+        {{ form|crispy }}
+        <button type="submit" class="btn btn-success">Sign up</button>
+      </form>
+    </div>
+  </div>
+{% endblock %}
