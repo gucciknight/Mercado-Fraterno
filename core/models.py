@@ -38,11 +38,11 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
-    username = None
     whatsapp = models.CharField(max_length=30)
     email = models.EmailField(_('email address'), unique=True)
+    USERNAME_FIELD = 'email'
+    username = models.CharField(max_length=30)
     objects = UserManager()
     
 
@@ -68,7 +68,7 @@ class CoinBalance(models.Model):
     offer = models.CharField(max_length=10000)
     balance = models.IntegerField()
     first_transaction_made = models.BooleanField( default=False)
-    is_valid = models.BooleanField( default=False)
+    is_valid = models.BooleanField(default=False)
     
 
 class Transaction(models.Model):

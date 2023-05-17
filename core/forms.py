@@ -10,7 +10,11 @@ class SignUpForm(UserCreationForm):
                                label='Número de Celular')
     first_name = forms.CharField(max_length=32, label='Nombre')
     last_name = forms.CharField(max_length=32, label='Apellido')
-    username = forms.HiddenInput
+    username = forms.EmailField(
+        widget=forms.HiddenInput(),
+        required = False,
+        initial="dummy@freestuff.com"
+        )
     email = forms.CharField()
     coins = forms.ChoiceField(widget=forms.Select, choices=Coin.objects.all().values_list('id', 'name'), 
                               label='Moneda a la que quiere participar')
@@ -49,7 +53,7 @@ class SignUpFormInvitation(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = [ 'first_name', 'last_name', 'email', 'password1', 'password2', 'whatsapp', 'coins']
+        fields = [ 'first_name', 'last_name', 'email', 'password1', 'password2', 'whatsapp', 'coins', 'username']
 
     def clean_email(self):
         email = self.cleaned_data["email"]

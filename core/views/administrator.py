@@ -27,9 +27,11 @@ class SignUpView(CreateView):
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
-        user = form.save()
+        user = form.save(commit=False)
+        user.username = self.request.POST['email']
+        user.save()
         coin = Coin.objects.get(pk = self.request.POST['coins'])
-        new_coin_balance = CoinBalance(user=user, coin=coin, offer=self.request.POST['offer'], balance=coin.base_quantity)
+        new_coin_balance = CoinBalance(user=user, coin=coin, offer=self.request.POST['offer'], balance=coin.base_quantity, is_valid=False)
         new_coin_balance.save()
         coin_list = CoinBalance.objects.filter(user=user)
         login(self.request, user)
@@ -39,12 +41,13 @@ class SignUpView(CreateView):
         })
 
 @login_required
-def user_validation(request, coin_balance_id):
+def user_validation(request, validated_coin_balance_id):
 
-    coin_balance = get_object_or_404(CoinBalance, pk=coin_balance_id)
-    coin_balance.is_validated = True
+    validated_user_coin_balance = get_object_or_404(CoinBalance, pk = validated_coin_balance_id)
+    validated_user_coin_balance.is_valid = True
+    validated_user_coin_balance.save()
 
-    return HttpResponseRedirect(reverse("core:transaction_view", args=(new_transaction.pk,)))
+    return HttpResponseRedirect(reverse("core:coin_list", args=(request.user.pk, )))
 
 class SignUpViewInvitation(FormView):
     model = User

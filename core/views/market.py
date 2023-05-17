@@ -44,8 +44,10 @@ class MarketView(DetailView):
         coin_id = coin_balance.coin.id
         balance = coin_balance.balance
         coin_offer = coin_balance.offer
-        coin_participants_with_this_user = CoinBalance.objects.filter(coin = coin_balance.coin)
-        coin_participants = coin_participants_with_this_user.exclude(user = coin_balance.user)
+        coin_participants_with_actual_user = CoinBalance.objects.filter(coin = coin_balance.coin)
+        coin_participants_without_validation = coin_participants_with_actual_user.exclude(user = coin_balance.user)
+        coin_participants = coin_participants_without_validation.filter(is_valid = True)  
+        new_coin_participants = coin_participants_without_validation.filter(is_valid = False)
         coin_history = Transaction.objects.filter(sender = coin_balance).filter(is_validated=True).order_by("-date")
         coin_movements = Transaction.objects.filter(sender__coin_id = coin_id).filter(is_validated=True).order_by("-date")
         extra_context = {
@@ -57,6 +59,7 @@ class MarketView(DetailView):
             "coin_balance_id": coin_balance.pk,
             "coin_history": coin_history, 
             "coin_movements": coin_movements,
+            "new_coin_participants": new_coin_participants,
         }
         kwargs.update(extra_context)
         return super().get_context_data(**kwargs)
