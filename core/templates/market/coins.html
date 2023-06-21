@@ -12,9 +12,7 @@
         <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">{{ coin.coin.name }}</button>
     </a>
     {% else %}
-    <a href="">
-        <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Tu solicitud para unirte a {{ coin.coin.name }}, se encuentra en evaluación</button>
-    </a>
+    <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Tu solicitud para unirte a {{ coin.coin.name }}, se encuentra en evaluación</button>
     {% endif %}
     {% endfor %}
 
@@ -23,6 +21,9 @@
         <button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Crear nueva moneda</button>
     </a>
     {% endif %}
+<br>
+<br>
+<a href="{% url 'core:user_update' user.pk %}">Actualizar</a>
 <br>
 <br>
 <a class="my-1 text-center" href="{% url 'logout' %}">log out</a>

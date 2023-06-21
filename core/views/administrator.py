@@ -49,6 +49,12 @@ def user_validation(request, validated_coin_balance_id):
 
     return HttpResponseRedirect(reverse("core:coin_list", args=(request.user.pk, )))
 
+@login_required
+def user_rejection(request, unvalidated_coin_balance_id):
+    unvalidated_user_coin_balance = get_object_or_404(CoinBalance, pk = unvalidated_coin_balance_id)
+    unvalidated_user_coin_balance.delete()
+    return redirect("/profile")
+
 class SignUpViewInvitation(FormView):
     model = User
     form_class = SignUpForm
@@ -75,3 +81,13 @@ class SignUpViewInvitation(FormView):
             "user" : user,
             "coin_list" : coin_list,
         })
+
+class UserUpdateView(UpdateView):
+    model = User
+
+    fields = [
+        'email',
+        '<PASSWORD>',
+    ]
+
+    success_url ="/"

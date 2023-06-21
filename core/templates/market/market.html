@@ -169,7 +169,7 @@
               <a href="{% url 'core:user_validation' participant.pk %}">
                 <span style="color:green;text-decoration:none">Aceptar</span> 
               </a>
-              <a href="">
+              <a href="{% url 'core:user_rejection' participant.pk %}">
                 <span style="color:red">Rechazar</span> 
               </a>
             </td>
