@@ -86,8 +86,10 @@ class UserUpdateView(UpdateView):
     model = User
 
     fields = [
+        'first_name',
         'email',
-        '<PASSWORD>',
+        'whatsapp',
+        'description'
     ]
 
     success_url ="/"

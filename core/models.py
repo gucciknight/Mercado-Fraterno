@@ -44,6 +44,7 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     username = models.CharField(max_length=30)
     objects = UserManager()
+    description = models.TextField(max_length=300, default='Sin descripción')
     
 
 class Participant(models.Model):
