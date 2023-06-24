@@ -93,3 +93,12 @@ class UserUpdateView(UpdateView):
     ]
 
     success_url ="/"
+
+class OfferUpdateView(UpdateView):
+    model = CoinBalance
+
+    fields = [
+        'offer',
+    ]
+    
+    success_url ="/"

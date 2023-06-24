@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<form method="post"> 
+<form method="post" class="p-5"> 
     {% csrf_token %} 
     {{ form|crispy }} 
-    <a href="change-password/">cambiar contraseña</a>
-    <br><br>
-    <input type="submit" value="Save"> 
+    <br>
+    <input type="submit" value="Guardar cambios"> 
 </form> 
 {% endblock %}

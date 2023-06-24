@@ -18,7 +18,11 @@
     <h4 class="saldo-actual"><strong>Saldo</strong> <span class="numbers">{{ coin_balance|intcomma }}</span></h4>
   </div>
     <br>
-    <h4><strong>Oferta</strong> </h4><snap>{{ coin_offer }}</snap>
+    <h4>
+      <strong>Oferta</strong> 
+    </h4>
+    <snap>{{ coin_offer }} </snap>
+    <a href="{% url 'core:offer_update' coin_balance_id %}">Editar</a>
 </div>
 
 <div class="container h-50 bg-light p-3 p-md-4">
