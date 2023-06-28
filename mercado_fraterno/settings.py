@@ -169,3 +169,6 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
+
+#dev email enviorment
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

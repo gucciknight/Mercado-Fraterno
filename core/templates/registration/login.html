@@ -21,8 +21,9 @@
         <input type="hidden" name="next" value="{{ next }}">
         {{ form.username|as_crispy_field }}
         {{ form.password|as_crispy_field }}
-        <div style="height:15px"></div>
         <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <div style="height:5px"></div>
+        <p class="text-center"><a href="{% url 'password_reset' %}">olvidé mi contraseña</a></p>
       </form>
     </div>
   </div>
