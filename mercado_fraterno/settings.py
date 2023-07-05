@@ -20,6 +20,8 @@ import sys
 PROJECT_ROOT = os.path.normpath(os.path.dirname(__file__))
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -30,7 +32,7 @@ SECRET_KEY = 'django-insecure-c!-yz@0j3#m$@y&tkf41%e_r71t#k#x0-3rdyspk418fa6zij3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dev.tumonedasocial.com']
 
 
 # Application definition
@@ -170,5 +172,16 @@ ACCOUNT_UNIQUE_EMAIL = True
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = 'email'
 
-#dev email enviorment
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_USE_TLS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp-relay.brevo.com'
+
+EMAIL_PORT = 587
+
+EMAIL_HOST_USER = 'arodriguezluna93@gmail.com'
+
+EMAIL_HOST_PASSWORD = 'VU9OGa6hjym73rWg'
+
+DEFAULT_FROM_EMAIL = 'arodriguezluna93@gmail.com'
