@@ -6,7 +6,7 @@ from core.models import ( Participant, Administrator,
                         Coin, CoinBalance, Transaction, User)
 
 class SignUpForm(UserCreationForm):
-    whatsapp = forms.CharField(max_length=8, help_text='Número de 8 dígitos, sin código de país ni anteponer 9',
+    whatsapp = forms.CharField(max_length=12, help_text='Agregar número antenopiendo +569',
                                label='Número de Celular')
     first_name = forms.CharField(max_length=32, label='Nombre')
     last_name = forms.CharField(max_length=32, label='Apellido')
@@ -39,7 +39,7 @@ class SignUpFormInvitation(UserCreationForm):
         self.coin_id = kwargs.pop('coin_id', None)
         super(SignUpFormInvitation, self).__init__(*args, **kwargs)
 
-    whatsapp = forms.CharField(max_length=8, help_text='Número de 8 dígitos, sin código de país ni anteponer 9',
+    whatsapp = forms.CharField(max_length=12, help_text='Agregar el número anteponiendo +569',
                                label='Número de Celular')
     first_name = forms.CharField(max_length=32, label='Nombre')
     last_name = forms.CharField(max_length=32, label='Apellido')
