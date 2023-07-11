@@ -27,12 +27,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-c!-yz@0j3#m$@y&tkf41%e_r71t#k#x0-3rdyspk418fa6zij3'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = DEBUG = int(os.environ.get("DEBUG", default=0))
 
-ALLOWED_HOSTS = ['dev.tumonedasocial.com']
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
 
 # Application definition
