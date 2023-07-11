@@ -7,3 +7,5 @@ mccabe==0.7.0
 pycodestyle==2.10.0
 pyflakes==3.0.1
 crispy-bootstrap4
+gunicorn==19.9.0
+
