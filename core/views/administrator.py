@@ -41,19 +41,19 @@ class SignUpView(CreateView):
         })
 
 @login_required
-def user_validation(request, validated_coin_balance_id):
+def user_validation(request, validated_coin_balance_id, user_coin_balance):
 
     validated_user_coin_balance = get_object_or_404(CoinBalance, pk = validated_coin_balance_id)
     validated_user_coin_balance.is_valid = True
     validated_user_coin_balance.save()
 
-    return HttpResponseRedirect(reverse("core:coin_list", args=(request.user.pk, )))
+    return HttpResponseRedirect(reverse("core:coin_list", args=(user_coin_balance, )))
 
 @login_required
-def user_rejection(request, unvalidated_coin_balance_id):
+def user_rejection(request, unvalidated_coin_balance_id, user_coin_balance):
     unvalidated_user_coin_balance = get_object_or_404(CoinBalance, pk = unvalidated_coin_balance_id)
     unvalidated_user_coin_balance.delete()
-    return redirect("/profile")
+    return HttpResponseRedirect(reverse("core:coin_list", args=(user_coin_balance, )))
 
 class SignUpViewInvitation(FormView):
     model = User
