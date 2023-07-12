@@ -7,6 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.urls import reverse, reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mass_mail
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.views.generic import (CreateView, DeleteView, DetailView, ListView,
                                   UpdateView)
@@ -121,6 +122,17 @@ def transference_validated(request, transaction_id):
     
     transaction.is_validated = True
     transaction.save()
+    datatuple = (
+        ("Has recibido una transferencia de " + user_coin_balance.user.first_name + " " + user_coin_balance.user.last_name,
+         "Hola " + reciever_coin_balance.user.first_name + ",<br><br> te informamos que " + user_coin_balance.user.first_name + " " + user_coin_balance.user.last_name + ", acaba de hacerte una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social" , 
+         "admin@tumonedasocial.com", 
+         [reciever_coin_balance.user.email]),
+        ("Tu transferencia a " + reciever_coin_balance.user.first_name + " " + reciever_coin_balance.user.last_name + " se ha realizado con éxito",
+         "Hola " + user_coin_balance.user.first_name + ",<br><br> te informamos que " + reciever_coin_balance.user.first_name + " " + reciever_coin_balance.user.last_name + ", ha recibido exitósamente una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social", 
+         "admin@tumonedasocial.com", 
+         [user_coin_balance.user.email]),
+    )
+    send_mass_mail(datatuple)
     '''
     return render(request, 'market/market.html', {
         'coin_balance': user_coin_balance,

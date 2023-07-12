@@ -170,10 +170,10 @@
             <td>{{ participant.user.email }}</td>
             <td>{{ participant.user.whatsapp }}</td>
             <td>
-              <a href="{% url 'core:user_validation' participant.pk %}">
+              <a href="{% url 'core:user_validation' participant.pk coin_balance_id %}">
                 <span style="color:green;text-decoration:none">Aceptar</span> 
               </a>
-              <a href="{% url 'core:user_rejection' participant.pk %}">
+              <a href="{% url 'core:user_rejection' participant.pk coin_balance_id %}">
                 <span style="color:red">Rechazar</span> 
               </a>
             </td>
