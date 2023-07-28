@@ -124,11 +124,11 @@ def transference_validated(request, transaction_id):
     transaction.save()
     datatuple = (
         ("Has recibido una transferencia de " + user_coin_balance.user.first_name + " " + user_coin_balance.user.last_name,
-         "Hola " + reciever_coin_balance.user.first_name + ",<br><br> te informamos que " + user_coin_balance.user.first_name + " " + user_coin_balance.user.last_name + ", acaba de hacerte una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social" , 
+         "Hola " + reciever_coin_balance.user.first_name + ",<br><br> Te informamos que " + user_coin_balance.user.first_name + " " + user_coin_balance.user.last_name + ", acaba de hacerte una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social" , 
          "admin@tumonedasocial.com", 
          [reciever_coin_balance.user.email]),
         ("Tu transferencia a " + reciever_coin_balance.user.first_name + " " + reciever_coin_balance.user.last_name + " se ha realizado con éxito",
-         "Hola " + user_coin_balance.user.first_name + ",<br><br> te informamos que " + reciever_coin_balance.user.first_name + " " + reciever_coin_balance.user.last_name + ", ha recibido exitósamente una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social", 
+         "Hola " + user_coin_balance.user.first_name + ",<br><br> Te informamos que " + reciever_coin_balance.user.first_name + " " + reciever_coin_balance.user.last_name + ", ha recibido exitósamente una transferencia de " + str(transaction.ammount) + " " + user_coin_balance.coin.name + "<br><br> Que tengas un excelente día <br> Atte. El equipo de Tu Moneda Social", 
          "admin@tumonedasocial.com", 
          [user_coin_balance.user.email]),
     )
