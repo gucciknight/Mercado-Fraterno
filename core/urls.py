@@ -10,6 +10,7 @@ urlpatterns = [
         path('detail_view/<int:coin_balance_id>/', market.transference, name="detail_view"),
         path('transaction_view/<int:pk>/', market.TransactionView.as_view(), name="transaction_view"),
         path('create_coin/<int:pk>/', market.CoinCreationView.as_view(), name='create_coin'),
+        path('create_coin_balance/<int:coin_id>', market.coin_balance_creation, name='create_coin_balance'),
         path('validation_accepted/<int:transaction_id>', market.transference_validated, name='validation_accepted'),
         path('validation_denied/<int:transaction_id>', market.transference_denied, name='validation_denied'),
         path('user_validation/<int:validated_coin_balance_id>/<int:user_coin_balance>', administrator.user_validation, name='user_validation'),
