@@ -1,5 +1,6 @@
 import re
 from tkinter import E
+from urllib import request
 from django import forms
 from django.db.models import Exists, OuterRef, Q
 from datetime import datetime
@@ -139,7 +140,7 @@ def transference_validated(request, transaction_id):
     })
     ''' 
     return HttpResponseRedirect(reverse("core:coin_list", args=(user_coin_balance.pk,)))
-    
+
 def transference_denied(request, transaction_id):
     transaction = get_object_or_404(Transaction, pk=transaction_id)
     user_coin_balance = get_object_or_404(CoinBalance, pk=transaction.sender.pk)
@@ -152,6 +153,21 @@ class CoinCreationView(CreateView):
     form_class = CoinCreationForm
     context_object_name = 'coin_form'
     template_name = 'coins/new_coin.html'
+
+    def get_success_url(self):
+        success_url = reverse_lazy('core:create_coin_balance', args=(self.object.pk,))
+        return success_url
+
+
+def coin_balance_creation(request, coin_id):
+    user = get_object_or_404(User, pk=request.user.pk)
+    coin = get_object_or_404(Coin, pk=coin_id)
+
+
+    new_coin_balance = CoinBalance(user=user, coin=coin, balance = coin.base_quantity, offer=user.description, is_valid=True)
+    new_coin_balance.save()
+
+    return HttpResponseRedirect(reverse('core:coin_list', args=(new_coin_balance.pk,)))
 
 
 '''
