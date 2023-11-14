@@ -30,9 +30,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 SECRET_KEY = 'django-insecure-c!-yz@0j3#m$@y&tkf41%e_r71t#k#x0-3rdyspk418fa6zij3'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['dev.tumonedasocial.com']
+ALLOWED_HOSTS = ['app.tumonedasocial.com']
 
 
 # Application definition
@@ -129,7 +129,7 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
-USE_L10N = True
+USE_L10N = False
 
 USE_TZ = True
 
@@ -185,3 +185,7 @@ EMAIL_HOST_USER = 'arodriguezluna93@gmail.com'
 EMAIL_HOST_PASSWORD = 'VU9OGa6hjym73rWg'
 
 DEFAULT_FROM_EMAIL = 'arodriguezluna93@gmail.com'
+
+USE_THOUSAND_SEPARATOR = True
+
+THOUSAND_SEPARATOR = '.'

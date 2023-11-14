@@ -3,18 +3,18 @@
 {% block content %}
 
 <h2 class=" text-center py-4">Bienvenido a Tu Moneda Social</h2>
-  <p class="lead">
-  Si ya tienes una cuenta <a href="{% url 'login' %}">Ingresa aquí</a>. Si eres un usuario nuevo debes ingresar por medio del <a href="{% url 'signup' %}">Link de invitación </a> y esperar a que tu solicitud sea aceptada.
-
+  <p class="text-center lead px-5">
+  Si ya tienes una cuenta <br>
+<a href="{% url 'login' %}"><button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Ingresa Aquí</button></a><br>
+<br> 
+Si eres un usuario nuevo  
+<br>
+<a href="{% url 'signup' %}"><button type="submit" value={} class="homeButton btn btn-primary py-3 my-1 mx-auto">Inscríbete</button></a>
+<div class="py-5"></div>
+<br>
+<br>
   </p>
   <hr>
-  <h3 class="text-md-left text-center py-4">Nos encontramos en periodo marcha blanca</h3>
-  <p>
-    En este periodo de marcha blanca es crucial que puedas explorar el sitio en sus funcionalidades mas importantes. Si encuentras algún error
-    en el proceso es importante que lo notifiques al siguiente correo elecronico: arodriguezluna93@gmail.com
-  </p>
-
-{% comment %}{% endcomment %} 
-  <p class="mb-0">Creado por <a href="https://www.linkedin.com/in/agustin-rodriguez-luna/">Agustín Rodríguez.</a><br></p>
+  <p class="mb-0 text-center" style="font-size:9px">Creado por <a href="https://www.linkedin.com/in/agustin-rodriguez-luna/">Agustín Rodríguez.</a><br></p>
 
 {% endblock %}

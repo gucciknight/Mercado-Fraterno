@@ -14,14 +14,14 @@
     </div>
   {% endif %}
   <div class="row mx-auto mb-5">
-    <div class="col-md-4 col-12 mx-auto">
-      <h2 class="text-center text-md-left my-4">Bienvenid@</h2>
+    <div class="col-md-6 col-12 mx-auto">
+	<h2 class=" text-center py-4">Ingresa</h2>
       <form method="post" novalidate>
         {% csrf_token %}
         <input type="hidden" name="next" value="{{ next }}">
         {{ form.username|as_crispy_field }}
         {{ form.password|as_crispy_field }}
-        <button type="submit" class="btn btn-primary">Iniciar Sesión</button>
+        <button type="submit" style="width:100% !important;" class="homeButton btn py-3 my-1 mx-auto">Iniciar Sesión</button>
         <div style="height:5px"></div>
         <p class="text-center"><a href="{% url 'password_reset' %}">olvidé mi contraseña</a></p>
       </form>
